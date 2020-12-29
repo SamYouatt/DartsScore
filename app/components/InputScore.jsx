@@ -1,19 +1,20 @@
 import React from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import {
+  View, TextInput, StyleSheet, Text,
+} from 'react-native';
 
-export default function InputScore(props) {
+export default function InputScore({ submitScore }) {
   const [value, setText] = React.useState();
 
-  const submitScore = (e) => {
-    props.updateTarget(e.nativeEvent.text);
-    setText('');
-  };
-
   return (
-    <View>
+    <View style={styles.container}>
+      <Text>Score:</Text>
       <TextInput
         onChangeText={(score) => setText(score)}
-        onSubmitEditing={submitScore}
+        onSubmitEditing={(e) => {
+          submitScore(e.nativeEvent.text);
+          setText('');
+        }}
         value={value}
         style={styles.scoreInput}
         keyboardType="number-pad"
@@ -23,9 +24,13 @@ export default function InputScore(props) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    marginTop: 25,
+  },
   scoreInput: {
     borderColor: 'black',
     borderWidth: 1,
+    borderRadius: 15,
     width: 150,
     height: 40,
     textAlign: 'center',

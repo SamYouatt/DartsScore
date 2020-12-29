@@ -1,15 +1,18 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import InputScore from './InputScore';
 
-export default function ShowScore() {
-  const [target, setTarget] = React.useState(501);
-
+export default function ShowScore({ target }) {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Your Score:</Text>
       <Text>{target}</Text>
-      <InputScore updateTarget={(score) => setTarget(target - score)} />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 25,
+  },
+});

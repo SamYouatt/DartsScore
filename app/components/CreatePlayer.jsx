@@ -1,0 +1,43 @@
+import React from 'react';
+import {
+  View, TextInput, Text, StyleSheet, Button,
+} from 'react-native';
+
+export default function CreatePlayer({ addPlayer }) {
+  const [name, setName] = React.useState();
+
+  return (
+    <View style={styles.container}>
+      <Text>Name:</Text>
+      <TextInput
+        style={styles.nameInput}
+        onChange={(e) => setName(e.nativeEvent.text)}
+        value={name}
+      />
+      <Button
+        title="Add Player"
+        style={styles.button}
+        onPress={() => {
+          addPlayer(name);
+          setName('');
+        }}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 25,
+  },
+  nameInput: {
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 15,
+    width: 150,
+    height: 40,
+    textAlign: 'center',
+  },
+  button: {
+  },
+});

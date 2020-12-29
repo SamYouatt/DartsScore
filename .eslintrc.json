@@ -18,7 +18,7 @@
         "react"
     ],
     "rules": {
-        "no-unused-vars": "off",
+        "no-unused-vars": "warn",
         "no-use-before-define": "off",
         "react/prop-types": ["off"]
     }
