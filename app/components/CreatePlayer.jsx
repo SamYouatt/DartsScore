@@ -12,15 +12,11 @@ export default function CreatePlayer({ addPlayer }) {
       <TextInput
         style={styles.nameInput}
         onChange={(e) => setName(e.nativeEvent.text)}
-        value={name}
-      />
-      <Button
-        title="Add Player"
-        style={styles.button}
-        onPress={() => {
+        onSubmitEditing={() => {
           addPlayer(name);
           setName('');
         }}
+        value={name}
       />
     </View>
   );

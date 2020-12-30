@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import CreatePlayer from './app/components/CreatePlayer';
 import LeaderBoard from './app/components/LeaderBoard';
-import ShowScore from './app/components/ShowScore';
+import ShowTarget from './app/components/ShowTarget';
 import InputScore from './app/components/InputScore';
 import SuggestCheckout from './app/components/SuggestCheckout';
 
@@ -19,8 +19,9 @@ export default function App() {
   };
 
   const updateTarget = (score) => {
-    const playerScores = players;
-    playerScores[currentPlayer].target -= score;
+    const currentScores = [...players];
+    currentScores[currentPlayer].target -= score;
+    setPlayers(currentScores);
 
     let currentPlayerIndex = currentPlayer;
     currentPlayerIndex += 1;
@@ -28,21 +29,23 @@ export default function App() {
       currentPlayerIndex -= players.length;
     }
     setCurrentPlayer(currentPlayerIndex);
-    setPlayers(playerScores);
   };
 
   return (
     <View style={styles.container}>
-      <LeaderBoard players={players} currentPlayer={currentPlayer} />
-      <ShowScore
-        target={players.length === 0 ? 'Add players to start scoring!' : players[currentPlayer].target}
-      />
-      {/* <SuggestCheckout
-        target={players.length === 0 ? '' : players[currentPlayer].target}
-      /> */}
-      <InputScore
-        submitScore={updateTarget}
-      />
+
+      {players.length > 0
+        ? (
+          <View>
+            <LeaderBoard players={players} currentPlayer={currentPlayer} />
+            <ShowTarget playerInfo={players[currentPlayer]} />
+            <InputScore
+              submitScore={updateTarget}
+            />
+          </View>
+        )
+        : <Text>Add a player to start scoring</Text>}
+
       <CreatePlayer
         addPlayer={addPlayer}
         style={styles.addPlayer}
