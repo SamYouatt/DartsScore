@@ -24,7 +24,8 @@ export default function CreatePlayer({ addPlayer }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 25,
+    // marginTop: 25,
+    flex: 2,
   },
   nameInput: {
     borderColor: 'black',

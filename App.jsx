@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  StyleSheet, Text, View,
+} from 'react-native';
 import CreatePlayer from './app/components/CreatePlayer';
 import LeaderBoard from './app/components/LeaderBoard';
 import ShowTarget from './app/components/ShowTarget';
@@ -33,16 +35,23 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-
       {players.length > 0
         ? (
-          <View>
-            <LeaderBoard players={players} currentPlayer={currentPlayer} />
-            <ShowTarget playerInfo={players[currentPlayer]} />
+          <>
+            <ShowTarget
+              playerInfo={players[currentPlayer]}
+              style={styles.showTarget}
+            />
             <InputScore
               submitScore={updateTarget}
+              style={styles.inputScore}
             />
-          </View>
+            <LeaderBoard
+              players={players}
+              currentPlayer={currentPlayer}
+              style={styles.leaderboard}
+            />
+          </>
         )
         : <Text>Add a player to start scoring</Text>}
 
@@ -56,13 +65,24 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 45,
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'stretch',
+    justifyContent: 'flex-start',
   },
-  playerInput: {
-    marginTop: 25,
-    backgroundColor: 'red',
+  showTarget: {
+    flex: 1,
+  },
+  leaderboard: {
+    flex: 2,
+  },
+  inputScore: {
+    flex: 2,
+  },
+  addPlayer: {
+    flex: 2,
+    borderWidth: 1,
+    borderColor: 'grey',
   },
 });

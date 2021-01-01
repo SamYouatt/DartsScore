@@ -3,52 +3,63 @@ import {
   View, Text, StyleSheet,
 } from 'react-native';
 import SuggestCheckout from './SuggestCheckout';
+import checkouts from '../../assets/checkout.json';
 
 export default function ShowScore({ playerInfo }) {
-  const displayScore = () => (
-    <View>
-      <View style={styles.container}>
-        <Text style={styles.name}>{playerInfo.name}</Text>
-        <Text>You Require:</Text>
+  return (
+    <View style={styles.container}>
+      <View style={styles.left}>
+        <View style={styles.nameContainer}>
+          <Text style={styles.name}>{playerInfo.name}</Text>
+          <Text style={styles.require}>you require...</Text>
+        </View>
+        <Text style={styles.target}>{playerInfo.target}</Text>
       </View>
-      <View style={styles.scoreContainer}>
-        <Text style={styles.score}>{playerInfo.target}</Text>
+      {checkouts[playerInfo.target] ? (
         <SuggestCheckout
           style={styles.checkouts}
           target={playerInfo.target}
         />
-      </View>
-    </View>
-  );
+      ) : null}
 
-  return (
-    <View>
-      {playerInfo ? displayScore() : <Text>Add players to start</Text>}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 25,
+    paddingTop: 15,
+    paddingLeft: 10,
+    flex: 1,
+    flexDirection: 'row',
+  },
+  left: {
+    flex: 2,
+  },
+  right: {
+    flex: 1,
+  },
+  nameContainer: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'baseline',
   },
   name: {
-    paddingLeft: 8,
     paddingRight: 8,
-    fontSize: 24,
-    textAlign: 'center',
+    fontSize: 28,
     color: '#6598eb',
     fontWeight: 'bold',
     marginRight: 0,
   },
+  require: {
+    fontSize: 28,
+  },
   scoreContainer: {
     alignItems: 'center',
   },
-  score: {
-    backgroundColor: 'red',
+  target: {
+    fontSize: 70,
+    fontWeight: 'bold',
   },
   checkouts: {
     borderStyle: 'solid',

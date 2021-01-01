@@ -25,7 +25,7 @@ export default function InputScore({ submitScore }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 25,
+    flex: 1,
   },
   scoreInput: {
     borderColor: 'black',

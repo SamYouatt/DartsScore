@@ -1,13 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 export default function LeaderBoard({ players, currentPlayer }) {
-  if (players.length === 0) {
-    return <Text>No players yet!</Text>;
-  }
-
   return (
-    <View>
+    <View style={styles.container}>
       {players.map((player, index) => (
         <View key={player.name}>
           <Text
@@ -23,6 +19,10 @@ export default function LeaderBoard({ players, currentPlayer }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 2,
+    backgroundColor: 'green',
+  },
   currentTurn: {
     backgroundColor: 'orange',
   },
