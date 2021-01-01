@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    backgroundColor: 'powderblue',
-    paddingLeft: 5,
+    backgroundColor: 'grey',
+    paddingLeft: 4,
     borderRadius: 5,
 
     shadowColor: '#000',

@@ -42,14 +42,14 @@ export default function App() {
               playerInfo={players[currentPlayer]}
               style={styles.showTarget}
             />
-            <InputScore
-              submitScore={updateTarget}
-              style={styles.inputScore}
-            />
             <LeaderBoard
               players={players}
               currentPlayer={currentPlayer}
               style={styles.leaderboard}
+            />
+            <InputScore
+              submitScore={updateTarget}
+              style={styles.inputScore}
             />
           </>
         )

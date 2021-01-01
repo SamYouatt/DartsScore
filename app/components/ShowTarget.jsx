@@ -29,9 +29,10 @@ export default function ShowScore({ playerInfo }) {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 15,
-    paddingLeft: 10,
+    paddingLeft: 25,
     flex: 1,
     flexDirection: 'row',
+    marginBottom: 25,
   },
   left: {
     flex: 2,
