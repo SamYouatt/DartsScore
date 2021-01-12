@@ -2,87 +2,30 @@ import React from 'react';
 import {
   StyleSheet, Text, View,
 } from 'react-native';
-import CreatePlayer from './app/components/CreatePlayer';
-import LeaderBoard from './app/components/LeaderBoard';
-import ShowTarget from './app/components/ShowTarget';
-import InputScore from './app/components/InputScore';
-import SuggestCheckout from './app/components/SuggestCheckout';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import Darts from './app/screens/Darts';
+import ChooseGamemode from './app/screens/ChooseGamemode';
+import Cricket from './app/screens/Cricket';
+import RoundTheWorld from './app/screens/RoundTheWorld';
+
+const Stack = createStackNavigator();
 
 export default function App() {
-  const [players, setPlayers] = React.useState([]);
-  const [currentPlayer, setCurrentPlayer] = React.useState(0);
-
-  const addPlayer = (name) => {
-    const newPlayer = {
-      name,
-      target: 501,
-    };
-    setPlayers((prevState) => [...prevState, newPlayer]);
-  };
-
-  const updateTarget = (score) => {
-    const currentScores = [...players];
-    currentScores[currentPlayer].target -= score;
-    setPlayers(currentScores);
-
-    let currentPlayerIndex = currentPlayer;
-    currentPlayerIndex += 1;
-    if (currentPlayerIndex > players.length - 1) {
-      currentPlayerIndex -= players.length;
-    }
-    setCurrentPlayer(currentPlayerIndex);
-  };
-
   return (
-    <View style={styles.container}>
-      {players.length > 0
-        ? (
-          <>
-            <ShowTarget
-              playerInfo={players[currentPlayer]}
-              style={styles.showTarget}
-            />
-            <LeaderBoard
-              players={players}
-              currentPlayer={currentPlayer}
-              style={styles.leaderboard}
-            />
-            <InputScore
-              submitScore={updateTarget}
-              style={styles.inputScore}
-            />
-          </>
-        )
-        : <Text>Add a player to start scoring</Text>}
-
-      <CreatePlayer
-        addPlayer={addPlayer}
-        style={styles.addPlayer}
-      />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="ChooseGamemode"
+        headerMode="false"
+      >
+        <Stack.Screen name="ChooseGamemode" component={ChooseGamemode} />
+        <Stack.Screen name="501Darts" component={Darts} />
+        <Stack.Screen name="Cricket" component={Cricket} />
+        <Stack.Screen name="RoundTheWorld" component={RoundTheWorld} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingTop: 45,
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'stretch',
-    justifyContent: 'flex-start',
-  },
-  showTarget: {
-    flex: 1,
-  },
-  leaderboard: {
-    flex: 2,
-  },
-  inputScore: {
-    flex: 2,
-  },
-  addPlayer: {
-    flex: 2,
-    borderWidth: 1,
-    borderColor: 'grey',
-  },
 });
